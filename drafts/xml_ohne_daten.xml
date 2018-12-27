@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE climateData SYSTEM "climateData.dtd">
+<climateData locationID="xxxxx">
+  <longitude unit="decimal_degrees"></longitude>
+  <latitude unit="decimal_degrees"></latitude>
+
+  <entry date="yyyy.mm.dd" time="hh:mm" standard="UTC">
+    <curTemp unit="C"></curTemp>
+    <avgTemp unit="C"></avgTemp>
+    <maxTemp unit="C"></maxTemp>
+    <minTemp unit="C"></minTemp>
+
+    <avgSurTemp unit="C"></avgSurTemp>
+    <maxSurTemp unit="C"></maxSurTemp>
+    <minSurTemp unit="C"></minSurTemp>
+    
+    <avgSolRad unit="W/m²"></avgSolRad>
+    <maxSolRad unit="W/m²"></maxSolRad>
+    <minSolRad unit="W/m²"></minSolRad>
+
+    <avgRelHum unit="%"></avgRelHum>
+  </entry>
+  
+  </climateData>

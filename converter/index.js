@@ -8,6 +8,14 @@ function finished() {
 }
 
 function convert(data, endString) {
+  const meta = `<climateData
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="climateData.xsd"
+  locationID="${data[1][0]}">
+  <longitude unit="decimal_degrees">${data[1][6]}</longitude>
+  <latitude unit="decimal_degrees">${data[1][7]}</latitude>`;
+  fs.appendFileSync(output, meta, 'utf8');
+
   for (let i = 1; i <= data.length - 2; i += 1) {
     const date = `${data[i][1].substring(0, 4)}.${data[i][1].substring(4, 6)}.${data[i][1].substring(6, 8)}`;
     const time = data[i][2].length === 4
@@ -45,10 +53,7 @@ function convert(data, endString) {
 
 function createXML(data) {
   const startString = `<?xml version="1.0" encoding="UTF-8"?>
-<climateData locationID="${data[1][0]}">
-  <longitude unit="decimal_degrees">${data[1][6]}</longitude>
-  <latitude unit="decimal_degrees">${data[1][7]}</latitude>`;
-
+<!DOCTYPE climateData SYSTEM "climateData.dtd">\n`;
   const endString = '\n\n</climateData>';
 
   fs.writeFile(output, startString, 'utf8', (err) => {
