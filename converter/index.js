@@ -26,20 +26,28 @@ function convert(data, endString) {
 
     const entry = `\n
   <entry date="${date}" time="${time}" standard="UTC">
-    <curTemp unit="C">${data[i][8]}</curTemp>
-    <avgTemp unit="C">${data[i][9]}</avgTemp>
-    <maxTemp unit="C">${data[i][10]}</maxTemp>
-    <minTemp unit="C">${data[i][11]}</minTemp>
+    <temperature>
+      <curTemp unit="C">${data[i][8]}</curTemp>
+      <avgTemp unit="C">${data[i][9]}</avgTemp>
+      <maxTemp unit="C">${data[i][10]}</maxTemp>
+      <minTemp unit="C">${data[i][11]}</minTemp>
+    </temperature>
 
-    <avgSurTemp unit="C">${data[i][13]}</avgSurTemp>
-    <maxSurTemp unit="C">${data[i][15]}</maxSurTemp>
-    <minSurTemp unit="C">${data[i][17]}</minSurTemp>
+    <surface>
+      <avgSurTemp unit="C">${data[i][13]}</avgSurTemp>
+      <maxSurTemp unit="C">${data[i][15]}</maxSurTemp>
+      <minSurTemp unit="C">${data[i][17]}</minSurTemp>
+    </surface>
     
-    <avgSolRad unit="W/m²">${data[i][20]}</avgSolRad>
-    <maxSolRad unit="W/m²">${data[i][22]}</maxSolRad>
-    <minSolRad unit="W/m²">${data[i][24]}</minSolRad>
+    <solar>
+      <avgSolRad unit="W/m²">${data[i][20]}</avgSolRad>
+      <maxSolRad unit="W/m²">${data[i][22]}</maxSolRad>
+      <minSolRad unit="W/m²">${data[i][24]}</minSolRad>
+    </solar>
 
-    <avgRelHum unit="%">${data[i][26]}</avgRelHum>
+    <humidity>
+      <avgRelHum unit="%">${data[i][26]}</avgRelHum>
+    </humidity>
   </entry>`;
 
     fs.appendFileSync(output, entry, 'utf8');
@@ -53,6 +61,7 @@ function convert(data, endString) {
 
 function createXML(data) {
   const startString = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="climateData.xsl"?>
 <!DOCTYPE climateData SYSTEM "climateData.dtd">\n`;
   const endString = '\n\n</climateData>';
 

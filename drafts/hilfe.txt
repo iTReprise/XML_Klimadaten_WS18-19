@@ -1,0 +1,12 @@
+Validate XSD:
+  xmllint --schema climateData.xsd climateData.xml --noout
+
+Validate DTD:
+  xmllint --noout --dtdvalid climateData.dtd climateData.xml
+
+
+<xsl:for-each select="//entry[starts-with(@date, '2017.01')]">
+  <br/><xsl:value-of select="./temperature/curTemp"/>
+</xsl:for-each>
+
+xsltproc climateData.xsl climateData.xml > test2.html

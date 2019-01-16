@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="climateData.xsl"?>
 <!DOCTYPE climateData SYSTEM "climateData.dtd">
-<climateData locationID="xxxxx">
+<climateData
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="climateData.xsd"
+  locationID="xxxxx">
   <longitude unit="decimal_degrees"></longitude>
   <latitude unit="decimal_degrees"></latitude>
 
   <entry date="yyyy.mm.dd" time="hh:mm" standard="UTC">
-    <curTemp unit="C"></curTemp>
-    <avgTemp unit="C"></avgTemp>
-    <maxTemp unit="C"></maxTemp>
-    <minTemp unit="C"></minTemp>
+    <temperature>
+      <curTemp unit="C"></curTemp>
+      <avgTemp unit="C"></avgTemp>
+      <maxTemp unit="C"></maxTemp>
+      <minTemp unit="C"></minTemp>
+    </temperature>
 
-    <avgSurTemp unit="C"></avgSurTemp>
-    <maxSurTemp unit="C"></maxSurTemp>
-    <minSurTemp unit="C"></minSurTemp>
+    <surface>
+      <avgSurTemp unit="C"></avgSurTemp>
+      <maxSurTemp unit="C"></maxSurTemp>
+      <minSurTemp unit="C"></minSurTemp>
+    </surface>
     
-    <avgSolRad unit="W/m²"></avgSolRad>
-    <maxSolRad unit="W/m²"></maxSolRad>
-    <minSolRad unit="W/m²"></minSolRad>
+    <solar>
+      <avgSolRad unit="W/m²"></avgSolRad>
+      <maxSolRad unit="W/m²"></maxSolRad>
+      <minSolRad unit="W/m²"></minSolRad>
+    </solar>
 
-    <avgRelHum unit="%"></avgRelHum>
+    <humidity>
+      <avgRelHum unit="%"></avgRelHum>
+    </humidity>
   </entry>
-  
-  </climateData>
+
+</climateData>
