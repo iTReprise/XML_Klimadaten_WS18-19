@@ -6,16 +6,28 @@
 <!ELEMENT longitude (#PCDATA)>
 <!ELEMENT latitude (#PCDATA)>
 <!ELEMENT entry (
+  temperature,
+  surface,
+  solar,
+  humidity
+)>
+<!ELEMENT temperature (
   curTemp,
   avgTemp,
   maxTemp,
-  minTemp,
+  minTemp
+)>
+<!ELEMENT surface (
   avgSurTemp,
   maxSurTemp,
-  minSurTemp,
+  minSurTemp
+)>
+<!ELEMENT solar (
   avgSolRad,
   maxSolRad,
-  minSolRad,
+  minSolRad
+)>
+<!ELEMENT humidity (
   avgRelHum
 )>
 <!ELEMENT curTemp (#PCDATA)>
@@ -31,6 +43,8 @@
 <!ELEMENT avgRelHum (#PCDATA)>
 
 <!ATTLIST climateData locationID CDATA #REQUIRED>
+<!ATTLIST climateData xmlns:xsi CDATA #REQUIRED>
+<!ATTLIST climateData xsi:noNamespaceSchemaLocation CDATA #REQUIRED>
 <!ATTLIST longitude unit CDATA #FIXED "decimal_degrees">
 <!ATTLIST latitude unit CDATA #FIXED "decimal_degrees">
 <!ATTLIST entry date CDATA #REQUIRED>
