@@ -17,6 +17,9 @@ function convert(data, endString) {
   fs.appendFileSync(output, meta, 'utf8');
 
   for (let i = 1; i <= data.length - 2; i += 1) {
+    data[i].map((value, index) => {
+      if (value <= -9999) data[i][index] = null;
+    });
     const date = `${data[i][1].substring(0, 4)}.${data[i][1].substring(4, 6)}.${data[i][1].substring(6, 8)}`;
     const time = data[i][2].length === 4
       ? `${data[i][2].substring(0, 2)}:${data[i][2].substring(2, 4)}`
@@ -34,15 +37,15 @@ function convert(data, endString) {
     </temperature>
 
     <surface>
-      <avgSurTemp unit="C">${data[i][13]}</avgSurTemp>
-      <maxSurTemp unit="C">${data[i][15]}</maxSurTemp>
-      <minSurTemp unit="C">${data[i][17]}</minSurTemp>
+      <avgSurTemp unit="C">${data[i][20]}</avgSurTemp>
+      <maxSurTemp unit="C">${data[i][22]}</maxSurTemp>
+      <minSurTemp unit="C">${data[i][24]}</minSurTemp>
     </surface>
     
     <solar>
-      <avgSolRad unit="W/m²">${data[i][20]}</avgSolRad>
-      <maxSolRad unit="W/m²">${data[i][22]}</maxSolRad>
-      <minSolRad unit="W/m²">${data[i][24]}</minSolRad>
+      <avgSolRad unit="W/m²">${data[i][13]}</avgSolRad>
+      <maxSolRad unit="W/m²">${data[i][15]}</maxSolRad>
+      <minSolRad unit="W/m²">${data[i][17]}</minSolRad>
     </solar>
 
     <humidity>
@@ -52,7 +55,6 @@ function convert(data, endString) {
 
     fs.appendFileSync(output, entry, 'utf8');
   }
-
   fs.appendFile(output, endString, 'utf8', (err) => {
     if (err) throw err;
     else finished();
