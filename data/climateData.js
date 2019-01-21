@@ -1,9 +1,12 @@
-/* global $ */
 /* global Chartist */
 /* global XPathResult */
 /* global fetch */
 /* global jQuery */
 
+/**
+ * Hashmap containing key-value pairs of
+ * a month string and its shorthand string equivalent
+ */
 const dateToStringMap = {
   2017.01: 'jan',
   2017.02: 'feb',
@@ -19,19 +22,47 @@ const dateToStringMap = {
   2017.12: 'dec',
 };
 
+let xmlDocument;
+
+/**
+ * Analyze an array of values and create the right chart
+ * @param {array} values All entries,
+ *        array[0] = 'jan' || 'feb' || etc.,
+ *        array[1] = 'curTemp' || 'avgtemp' || etc.
+ */
 function doStuff(values) {
   const currMonthString = dateToStringMap[values.shift()];
-  let currInformation = values.shift();
-  currInformation = currInformation.charAt(0).toUpperCase() + currInformation.slice(1);
+  let currInf = values.shift();
+  currInf = currInf.charAt(0).toUpperCase() + currInf.slice(1);
 
-  Chartist.Line(`#${currMonthString + currInformation}`, {
-    labels: [],
+  const labelValues = [];
+  for (let i = 0; i < values.length; i += 1) {
+    labelValues.push(i + 1);
+  }
+
+  Chartist.Line(`#${currMonthString + currInf}`, {
+    labels: labelValues,
     series: [values],
   });
 }
 
-async function getAllMonthEntries(xmlDoc, date, value) {
-  const iterator = xmlDoc.evaluate(`//entry[starts-with(@date, ${date})]/${value}`, xmlDoc, null, XPathResult.ANY_TYPE, null);
+/**
+ * Get all values with the specified date and time restrictions
+ * @param {document} xmlDoc The XML Document
+ * @param {string} date Date in this format: 'yyyy.mm.dd'
+ * @param {sting} time Time in this format: 'hh:mm'
+ * @param {string} value xPath expression to select the relevant nodes,
+ *        f.e. /temperature/curTemp
+ * @returns {Promise} Array containg all values
+ */
+async function getAllMonthEntries(xmlDoc, date, time, value) {
+  const iterator = xmlDoc.evaluate(
+    `//entry[starts-with(@date, '${date}') and @time='${time}']/${value}`,
+    xmlDoc,
+    null,
+    XPathResult.ANY_TYPE,
+    null,
+  );
 
   const array = [];
   let curr = iterator.iterateNext();
@@ -45,40 +76,28 @@ async function getAllMonthEntries(xmlDoc, date, value) {
   return array;
 }
 
+/**
+ * Parse xmlTest to xml file and start calling xPath expressions
+ * @param {text} xmlText The text of a valid xml file
+ */
 async function startXPathFuncs(xmlText) {
   const xmlDoc = jQuery.parseXML(xmlText);
+  xmlDocument = xmlDoc;
 
   for (let i = 1; i <= 12; i += 1) {
-    getAllMonthEntries(xmlDoc, `2017.${i < 10 ? `0${i}` : i}`, 'temperature/curTemp').then(doStuff);
+    getAllMonthEntries(
+      xmlDoc,
+      `2017.${i < 10 ? `0${i}` : i}`,
+      '01:00',
+      'temperature/curTemp',
+    ).then(doStuff);
   }
 }
 
-fetch('http://localhost:1543/climateData.xml').then(response => response.text().then(text => startXPathFuncs(text)));
-
-$(() => {
-  /*
-  const janCurTempData = $('#janCurTempData').text().slice(0, -1).split(/,/);
-  Chartist.Line('#janCurTemp', {
-    labels: [1, 2, 3, 4],
-    series: [janCurTempData],
-  });
-  */
-
-/*   const febCurTempData = $('#febCurTempData').text().slice(0, -1).split(/,/);
-  Chartist.Line('#febCurTemp', {
-    labels: [1, 2, 3, 4],
-    series: [febCurTempData],
-  });
-
-  const marCurTempData = $('#marCurTempData').text().slice(0, -1).split(/,/);
-  Chartist.Line('#marCurTemp', {
-    labels: [1, 2, 3, 4],
-    series: [marCurTempData],
-  });
-
-  const aprCurTempData = $('#aprCurTempData').text().slice(0, -1).split(/,/);
-  Chartist.Line('#aprCurTemp', {
-    labels: [1, 2, 3, 4],
-    series: [aprCurTempData],
-  }); */
-});
+/**
+ * Main
+ * Fetch a xml file and start evaluation of it
+ */
+fetch('http://localhost:1543/climateData.xml')
+  .then(response => response.text()
+    .then(text => startXPathFuncs(text)));

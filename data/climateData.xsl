@@ -15,7 +15,7 @@
       <title>Klimadaten von Dinosaur, CO</title>
     </head>
     <body>
-      <h1 class="text-center">Klima</h1>
+      <h1 class="text-center">Klimadaten für Dinosaur, Colorado</h1>
       <xsl:call-template name="everyMonthCurTemp"/>
 
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -35,62 +35,78 @@
         <xsl:with-param name="monthAbr" select="'jan'"/>
         <xsl:with-param name="monthInt" select="'2017.01'"/>
       </xsl:call-template>
+    </div>
+    <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'Februar'"/>
         <xsl:with-param name="monthAbr" select="'feb'"/>
         <xsl:with-param name="monthInt" select="'2017.02'"/>
       </xsl:call-template>
+    </div>
+    <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'März'"/>
         <xsl:with-param name="monthAbr" select="'mar'"/>
         <xsl:with-param name="monthInt" select="'2017.03'"/>
       </xsl:call-template>
+    </div>
+    <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'April'"/>
         <xsl:with-param name="monthAbr" select="'apr'"/>
         <xsl:with-param name="monthInt" select="'2017.04'"/>
       </xsl:call-template>
     </div>
-
     <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'Mai'"/>
         <xsl:with-param name="monthAbr" select="'may'"/>
         <xsl:with-param name="monthInt" select="'2017.05'"/>
       </xsl:call-template>
+    </div>
+    <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'Juni'"/>
         <xsl:with-param name="monthAbr" select="'jun'"/>
         <xsl:with-param name="monthInt" select="'2017.06'"/>
       </xsl:call-template>
+    </div>
+    <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'Juli'"/>
         <xsl:with-param name="monthAbr" select="'jul'"/>
         <xsl:with-param name="monthInt" select="'2017.07'"/>
       </xsl:call-template>
+    </div>
+    <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'August'"/>
         <xsl:with-param name="monthAbr" select="'aug'"/>
         <xsl:with-param name="monthInt" select="'2017.08'"/>
       </xsl:call-template>
     </div>
-
     <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'September'"/>
         <xsl:with-param name="monthAbr" select="'sep'"/>
         <xsl:with-param name="monthInt" select="'2017.09'"/>
       </xsl:call-template>
+    </div>
+    <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'Oktober'"/>
         <xsl:with-param name="monthAbr" select="'oct'"/>
         <xsl:with-param name="monthInt" select="'2017.10'"/>
       </xsl:call-template>
+    </div>
+    <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'November'"/>
         <xsl:with-param name="monthAbr" select="'nov'"/>
         <xsl:with-param name="monthInt" select="'2017.11'"/>
       </xsl:call-template>
+    </div>
+    <div class="row">
       <xsl:call-template name="singleMonthCurTemp">
         <xsl:with-param name="monthFull" select="'Dezember'"/>
         <xsl:with-param name="monthAbr" select="'dec'"/>
@@ -105,11 +121,8 @@
   <xsl:param name="monthFull"/>
   <xsl:param name="monthAbr"/>
   <xsl:param name="monthInt"/>
-  <div class="container-fluid col-sm monthName"><xsl:value-of select="$monthFull"/><br/>
+  <div class="container-fluid col-sm monthName"><xsl:value-of select="$monthFull"/>, 01:00 Uhr<br/>
   <div id="{$monthAbr}CurTemp" class="ct-chart ct-perfect-fourth"/>
-  <p id="{$monthAbr}CurTempData" hidden="true">
-    <xsl:for-each select="//entry[starts-with(@date, $monthInt)]"><xsl:value-of select="./temperature/curTemp"/>,</xsl:for-each>
-  </p>
 </div>
 </xsl:template>
 
