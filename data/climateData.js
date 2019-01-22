@@ -23,7 +23,7 @@ const dateToStringMap = {
   2017.12: 'dec',
 };
 
-const times = ['17:00']; /* change entries to show more than one line per chart */
+let times = ['01:00', null, null, null, null]; /* change entries to show more than one line per chart */
 
 const initCharts = {
   curTemp: true,
@@ -48,29 +48,49 @@ let xmlDocument;
  *        array[1] = 'curTemp' || 'avgtemp' || etc.
  */
 function doStuff(dataPoints) {
+  const xpathExp = dataPoints.shift();
   const currMonthString = dateToStringMap[dataPoints.shift()];
   let currInf = dataPoints.shift();
   currInf = currInf.charAt(0).toUpperCase() + currInf.slice(1);
   let unit = dataPoints.shift();
-  unit = unit === 'C' || unit === 'F' ? `°${unit}` : ` ${unit}`;
+  unit = unit === 'C' || unit === 'F' ? `°${unit}` : `${unit}`;
 
   const labelValues = [];
   for (let i = 0; i < dataPoints[0].length; i += 1) {
     labelValues.push(i + 1);
   }
 
-  Chartist.Line(`#${currMonthString + currInf}`,
+  /* show a different style of chart for relHum or solRad */
+  const fancyMode = xpathExp.split('/')[0] === 'humidity' || xpathExp.split('/')[0] === 'solar';
+  const currChart = Chartist.Line(`#${currMonthString + currInf}`,
     {
       labels: labelValues,
       series: dataPoints,
     },
     {
       showPoint: false,
+      showArea: fancyMode,
       axisY: {
         labelInterpolationFnc: value => value + unit,
+        offset: 60,
         onlyInteger: true,
       },
     });
+
+  /* animate chart */
+  currChart.on('draw', (data) => {
+    if (data.type === 'line' || data.type === 'area') {
+      data.element.animate({
+        d: {
+          begin: data.index * 800,
+          dur: 4000,
+          from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+          to: data.path.clone().stringify(),
+          easing: Chartist.Svg.Easing.easeInOutCirc,
+        },
+      });
+    }
+  });
 }
 
 /**
@@ -88,29 +108,34 @@ async function getAllMonthEntries(xmlDoc, date, xpathExp) {
 
   for (let i = 0; i < times.length; i += 1) {
     const element = times[i];
+    if (element === null) {
+      const array = [];
+      dataPoints[i] = array;
+    } else {
+      const iterator = xmlDoc.evaluate(
+        `//entry[starts-with(@date, '${date}') and @time='${element}']/${xpathExp}`,
+        xmlDoc,
+        null,
+        XPathResult.ANY_TYPE,
+        null,
+      );
 
-    const iterator = xmlDoc.evaluate(
-      `//entry[starts-with(@date, '${date}') and @time='${element}']/${xpathExp}`,
-      xmlDoc,
-      null,
-      XPathResult.ANY_TYPE,
-      null,
-    );
+      const array = [];
+      let curr = iterator.iterateNext();
+      unit = curr.getAttribute('unit');
 
-    const array = [];
-    let curr = iterator.iterateNext();
-    unit = curr.getAttribute('unit');
-
-    while (curr) {
-      array.push(curr.textContent);
-      curr = iterator.iterateNext();
+      while (curr) {
+        array.push(curr.textContent);
+        curr = iterator.iterateNext();
+      }
+      dataPoints.push(array);
     }
-    dataPoints.push(array);
   }
 
   dataPoints.unshift(unit);
   dataPoints.unshift(xpathExp.split('/').pop());
   dataPoints.unshift(date);
+  dataPoints.unshift(xpathExp);
 
   return dataPoints;
 }
@@ -168,25 +193,40 @@ $(() => {
     $('.humidityCards').toggle();
   });
 
-  /* TODO add other returns */
   $('.backToTemperatur').click(() => {
     $('.temperatureCards').toggle();
     $('.monthsBase').hide();
+    times = ['01:00', null, null, null, null];
+    $('.btn').each((index, element) => {
+      if ($(element).attr('id') !== 'btnA') $(element).removeClass('active');
+    });
   });
 
   $('.backToOberflächentemperatur').click(() => {
     $('.surfaceCards').toggle();
     $('.monthsBase').hide();
+    times = ['01:00', null, null, null, null];
+    $('.btn').each((index, element) => {
+      if ($(element).attr('id') !== 'btnA') $(element).removeClass('active');
+    });
   });
 
   $('.backToSonneneinstrahlung').click(() => {
     $('.solarCards').toggle();
     $('.monthsBase').hide();
+    times = ['01:00', null, null, null, null];
+    $('.btn').each((index, element) => {
+      if ($(element).attr('id') !== 'btnA') $(element).removeClass('active');
+    });
   });
 
   $('.backToLuftfeuchtigkeit').click(() => {
     $('.humidityCards').toggle();
     $('.monthsBase').hide();
+    times = ['01:00', null, null, null, null];
+    $('.btn').each((index, element) => {
+      if ($(element).attr('id') !== 'btnA') $(element).removeClass('active');
+    });
   });
 
   $('.backToMain').click(() => {
@@ -293,10 +333,95 @@ $(() => {
   $('#showAvgRelHum').click(() => {
     $('#everyMonthAvgRelHum').toggle();
     $('.subCards').hide();
-    if (initCharts.avgSolar) {
+    if (initCharts.avgRelHum) {
       $('.AvgRelHumChart').each((index, element) => element.__chartist__.update());
     } else {
       startXPathFuncs('humidity/avgRelHum');
+    }
+  });
+
+  $('.btn').click(function btnClicked() {
+    const btn = $(this);
+    const btnString = btn.text().substring(0, 5);
+    const xPath = btn.parent().parent().parent().parent()
+      .attr('class')
+      .split(' ')[1];
+
+    if (btn.attr('id') === 'btnReset' || btn.attr('id') === 'btnApply') {
+      if (btn.attr('id') === 'btnApply') {
+        /* User clicked no time slot and still applied */
+        if (times.every(element => element === null)) {
+          times = ['01:00', null, null, null, null];
+          $('.btn').each((index, element) => {
+            if ($(element).attr('id') === 'btnA') $(element).addClass('active');
+          });
+        }
+        /* start drawing the charts and discard the click event */
+        startXPathFuncs(xPath);
+        return;
+      }
+      /**
+       * User pressed reset, remove the active element
+       * (loop, because the same button exists in different sub menus)
+       */
+      $('.btn').each((index, element) => {
+        if ($(element).attr('id') !== 'btnA') $(element).removeClass('active');
+        else $(element).addClass('active');
+      });
+      /* reset times and draw charts. Discard the remaining click event */
+      times = ['01:00', null, null, null, null];
+      startXPathFuncs(xPath);
+      return;
+    }
+
+    /**
+     * Toggle time slot on/off.
+     * Force value in correct position to keep line charts in the right color
+     */
+    if (btn.hasClass('active')) {
+      btn.removeClass('active');
+      switch (btnString) {
+        case '01:00':
+          times[0] = null;
+          break;
+        case '06:00':
+          times[1] = null;
+          break;
+        case '11:00':
+          times[2] = null;
+          break;
+        case '16:00':
+          times[3] = null;
+          break;
+        case '21:00':
+          times[4] = null;
+          break;
+        default:
+          times = ['01:00', null, null, null, null];
+          break;
+      }
+    } else {
+      btn.addClass('active');
+      switch (btnString) {
+        case '01:00':
+          times[0] = btnString;
+          break;
+        case '06:00':
+          times[1] = btnString;
+          break;
+        case '11:00':
+          times[2] = btnString;
+          break;
+        case '16:00':
+          times[3] = btnString;
+          break;
+        case '21:00':
+          times[4] = btnString;
+          break;
+        default:
+          times = ['01:00', null, null, null, null];
+          break;
+      }
     }
   });
 });

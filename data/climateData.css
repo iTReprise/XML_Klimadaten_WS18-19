@@ -5,3 +5,112 @@ html * {
 .monthsBase, .subCards {
   display: none;
 }
+
+#btnA {
+  border-color: #8D3B72;
+  color: #8D3B72;
+}
+
+#btnA:hover, #btnA.active {
+  background-color: #8D3B72;
+  color: white;
+}
+
+#btnB {
+  border-color: #8A7090;
+  color: #8A7090;
+}
+
+#btnB:hover, #btnB.active {
+  background-color: #8A7090;
+  color: white;
+}
+
+#btnC {
+  border-color: #89A7A7;
+  color: #89A7A7;
+}
+
+#btnC:hover, #btnC.active {
+  background-color: #89A7A7;
+  color: white;
+}
+
+#btnD {
+  border-color: #72E1D1;
+  color: #72E1D1;
+}
+
+#btnD:hover, #btnD.active {
+  background-color: #72E1D1;
+  color: white;
+}
+
+#btnE {
+  border-color: #B5D8CC;
+  color: #B5D8CC;
+}
+
+#btnE:hover, #btnE.active {
+  background-color: #B5D8CC;
+  color: white;
+}
+
+#btnReset, #btnApply {
+  border-color: #121616;
+  color: #121616;
+}
+
+#btnReset:hover {
+  border-color: transparent;
+  background: linear-gradient(to right, #8D3B72 0%, #8A7090 51%, #89A7A7 100%);
+  color: white;
+  background-size: 105% auto;
+}
+
+#btnApply:hover {
+  border-color: transparent;
+  background: linear-gradient(to right, #89A7A7 0%, #72E1D1 51%, #B5D8CC 100%);
+  color: white;
+  background-size: 105% auto;
+}
+
+.ct-series-a .ct-line {
+  stroke: #8D3B72;
+}
+
+.ct-series-b .ct-line {
+  stroke: #8A7090;
+}
+
+.ct-series-c .ct-line {
+  stroke: #89A7A7;
+}
+
+.ct-series-d .ct-line {
+  stroke: #72E1D1;
+}
+
+.ct-series-e .ct-line {
+  stroke: #B5D8CC;
+}
+
+.ct-series-a .ct-area {
+  fill: #8D3B72;
+}
+
+.ct-series-b .ct-area {
+  fill: #8A7090;
+}
+
+.ct-series-c .ct-area {
+  fill: #89A7A7;
+}
+
+.ct-series-d .ct-area {
+  fill: #72E1D1;
+}
+
+.ct-series-e .ct-area {
+  fill: #B5D8CC;
+}
