@@ -10,7 +10,7 @@ function finished() {
 function convert(data, endString) {
   const meta = `<climateData
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="climateData.xsd"
+  xsi:noNamespaceSchemaLocation="/climateData.xsd"
   locationID="${data[1][0]}">
   <longitude unit="decimal_degrees">${data[1][6]}</longitude>
   <latitude unit="decimal_degrees">${data[1][7]}</latitude>`;
@@ -63,7 +63,7 @@ function convert(data, endString) {
 
 function createXML(data) {
   const startString = `<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="climateData.xsl"?>
+<?xml-stylesheet type="text/xsl" href="/climateData.xsl"?>
 <!DOCTYPE climateData SYSTEM "climateData.dtd">\n`;
   const endString = '\n\n</climateData>';
 

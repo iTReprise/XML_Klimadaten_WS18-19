@@ -6,6 +6,12 @@ html * {
   display: none;
 }
 
+.card:hover {
+  border-image: none;
+  border-color: #fff;
+  background-image: linear-gradient(to right, rgba(141,59,114,0.3) 0%, rgba(138,112,144,0.3) 25%, rgba(137,167,167,0.3) 50%, rgba(114,225,209,0.3) 75%, rgba(181,216,204,0.3) 100%);
+}
+
 #btnA {
   border-color: #8D3B72;
   color: #8D3B72;
@@ -64,14 +70,12 @@ html * {
 #btnReset:hover {
   border-color: transparent;
   background: linear-gradient(to right, #8D3B72 0%, #8A7090 51%, #89A7A7 100%);
-  color: white;
   background-size: 105% auto;
 }
 
 #btnApply:hover {
   border-color: transparent;
   background: linear-gradient(to right, #89A7A7 0%, #72E1D1 51%, #B5D8CC 100%);
-  color: white;
   background-size: 105% auto;
 }
 
@@ -79,38 +83,78 @@ html * {
   stroke: #8D3B72;
 }
 
-.ct-series-b .ct-line {
-  stroke: #8A7090;
-}
-
-.ct-series-c .ct-line {
-  stroke: #89A7A7;
-}
-
-.ct-series-d .ct-line {
-  stroke: #72E1D1;
-}
-
-.ct-series-e .ct-line {
-  stroke: #B5D8CC;
-}
-
 .ct-series-a .ct-area {
   fill: #8D3B72;
+}
+
+.ct-series-b .ct-line {
+  stroke: #8A7090;
 }
 
 .ct-series-b .ct-area {
   fill: #8A7090;
 }
 
+.ct-series-c .ct-line {
+  stroke: #89A7A7;
+}
+
 .ct-series-c .ct-area {
   fill: #89A7A7;
+}
+
+.ct-series-d .ct-line {
+  stroke: #72E1D1;
 }
 
 .ct-series-d .ct-area {
   fill: #72E1D1;
 }
 
+.ct-series-e .ct-line {
+  stroke: #B5D8CC;
+}
+
 .ct-series-e .ct-area {
   fill: #B5D8CC;
+}
+
+.linkColor {
+  color: #B5D8CC;
+}
+
+.linkColor:hover {
+  color: #8D3B72;
+}
+
+.card {
+  border-image: linear-gradient(to right, rgba(141,59,114,0.3) 0%, rgba(138,112,144,0.3) 25%, rgba(137,167,167,0.3) 50%, rgba(114,225,209,0.3) 75%, rgba(181,216,204,0.3) 100%);
+  border-image-slice: 1;
+  border-width: 0.1sem;
+}
+
+/*
+** Github Corner-Banner
+** MIT License
+*/
+.github-corner {
+  fill: url(#fiveColorGradient);
+  color: #fff;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+}
+
+.github-corner:hover {
+  color: #fff;
+}
+.github-corner:hover .octo-arm {
+  animation:octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0%,100% {transform:rotate(0)}
+  20%,60%{transform:rotate(-25deg)}
+  40%,80%{transform:rotate(10deg)}
 }
