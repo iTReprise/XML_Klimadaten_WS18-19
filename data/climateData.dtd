@@ -50,14 +50,36 @@
 <!ATTLIST entry date CDATA #REQUIRED>
 <!ATTLIST entry time CDATA #REQUIRED>
 <!ATTLIST entry standard CDATA #FIXED "UTC">
-<!ATTLIST curTemp unit CDATA #REQUIRED>
-<!ATTLIST avgTemp unit CDATA #REQUIRED>
-<!ATTLIST maxTemp unit CDATA #REQUIRED>
-<!ATTLIST minTemp unit CDATA #REQUIRED>
-<!ATTLIST avgSurTemp unit CDATA #REQUIRED>
-<!ATTLIST maxSurTemp unit CDATA #REQUIRED>
-<!ATTLIST minSurTemp unit CDATA #REQUIRED>
-<!ATTLIST avgSolRad unit CDATA #REQUIRED>
-<!ATTLIST maxSolRad unit CDATA #REQUIRED>
-<!ATTLIST minSolRad unit CDATA #REQUIRED>
-<!ATTLIST avgRelHum unit CDATA #REQUIRED>
+<!ATTLIST curTemp
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST avgTemp
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST maxTemp
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST minTemp
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST avgSurTemp
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST maxSurTemp
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST minSurTemp
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST avgSolRad
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST maxSolRad
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST minSolRad
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>
+<!ATTLIST avgRelHum
+  unit CDATA #REQUIRED
+  xsi:nil (true|false) #REQUIRED>

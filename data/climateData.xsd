@@ -26,32 +26,32 @@
 
 <xs:complexType name="temperatureType">
   <xs:sequence>
-    <xs:element name="curTemp" type="decimalWithUnit"/>
-    <xs:element name="avgTemp" type="decimalWithUnit"/>
-    <xs:element name="maxTemp" type="decimalWithUnit"/>
-    <xs:element name="minTemp" type="decimalWithUnit"/>
+    <xs:element name="curTemp" type="decimalWithUnit" nillable="true"/>
+    <xs:element name="avgTemp" type="decimalWithUnit" nillable="true"/>
+    <xs:element name="maxTemp" type="decimalWithUnit" nillable="true"/>
+    <xs:element name="minTemp" type="decimalWithUnit" nillable="true"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="surfaceType">
   <xs:sequence>
-    <xs:element name="avgSurTemp" type="decimalWithUnit"/>
-    <xs:element name="maxSurTemp" type="decimalWithUnit"/>
-    <xs:element name="minSurTemp" type="decimalWithUnit"/>
+    <xs:element name="avgSurTemp" type="decimalWithUnit" nillable="true"/>
+    <xs:element name="maxSurTemp" type="decimalWithUnit" nillable="true"/>
+    <xs:element name="minSurTemp" type="decimalWithUnit" nillable="true"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="solarType">
   <xs:sequence>
-    <xs:element name="avgSolRad" type="decimalWithUnit"/>
-    <xs:element name="maxSolRad" type="decimalWithUnit"/>
-    <xs:element name="minSolRad" type="decimalWithUnit"/>
+    <xs:element name="avgSolRad" type="decimalWithUnit" nillable="true"/>
+    <xs:element name="maxSolRad" type="decimalWithUnit" nillable="true"/>
+    <xs:element name="minSolRad" type="decimalWithUnit" nillable="true"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="humidityType">
   <xs:sequence>
-    <xs:element name="avgRelHum" type="decimalWithUnit"/>
+    <xs:element name="avgRelHum" type="decimalWithUnit" nillable="true"/>
   </xs:sequence>
 </xs:complexType>
 

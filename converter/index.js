@@ -16,9 +16,11 @@ function convert(data, endString) {
   <latitude unit="decimal_degrees">${data[1][7]}</latitude>`;
   fs.appendFileSync(output, meta, 'utf8');
 
+  const fixed = data;
   for (let i = 1; i <= data.length - 2; i += 1) {
     data[i].map((value, index) => {
-      if (value <= -9999) data[i][index] = null;
+      if (value <= -9999) fixed[i][index] = '';
+      return value;
     });
     const date = `${data[i][1].substring(0, 4)}.${data[i][1].substring(4, 6)}.${data[i][1].substring(6, 8)}`;
     const time = data[i][2].length === 4
@@ -30,26 +32,26 @@ function convert(data, endString) {
     const entry = `\n
   <entry date="${date}" time="${time}" standard="UTC">
     <temperature>
-      <curTemp unit="C">${data[i][8]}</curTemp>
-      <avgTemp unit="C">${data[i][9]}</avgTemp>
-      <maxTemp unit="C">${data[i][10]}</maxTemp>
-      <minTemp unit="C">${data[i][11]}</minTemp>
+      <curTemp unit="C" xsi:nil="${data[i][8] === ''}">${data[i][8]}</curTemp>
+      <avgTemp unit="C" xsi:nil="${data[i][9] === ''}">${data[i][9]}</avgTemp>
+      <maxTemp unit="C" xsi:nil="${data[i][10] === ''}">${data[i][10]}</maxTemp>
+      <minTemp unit="C" xsi:nil="${data[i][11] === ''}">${data[i][11]}</minTemp>
     </temperature>
 
     <surface>
-      <avgSurTemp unit="C">${data[i][20]}</avgSurTemp>
-      <maxSurTemp unit="C">${data[i][22]}</maxSurTemp>
-      <minSurTemp unit="C">${data[i][24]}</minSurTemp>
+      <avgSurTemp unit="C" xsi:nil="${data[i][20] === ''}">${data[i][20]}</avgSurTemp>
+      <maxSurTemp unit="C" xsi:nil="${data[i][22] === ''}">${data[i][22]}</maxSurTemp>
+      <minSurTemp unit="C" xsi:nil="${data[i][24] === ''}">${data[i][24]}</minSurTemp>
     </surface>
     
     <solar>
-      <avgSolRad unit="W/m²">${data[i][13]}</avgSolRad>
-      <maxSolRad unit="W/m²">${data[i][15]}</maxSolRad>
-      <minSolRad unit="W/m²">${data[i][17]}</minSolRad>
+      <avgSolRad unit="W/m²" xsi:nil="${data[i][13] === ''}">${data[i][13]}</avgSolRad>
+      <maxSolRad unit="W/m²" xsi:nil="${data[i][15] === ''}">${data[i][15]}</maxSolRad>
+      <minSolRad unit="W/m²" xsi:nil="${data[i][17] === ''}">${data[i][17]}</minSolRad>
     </solar>
 
     <humidity>
-      <avgRelHum unit="%">${data[i][26]}</avgRelHum>
+      <avgRelHum unit="%" xsi:nil="${data[i][26] === ''}">${data[i][26]}</avgRelHum>
     </humidity>
   </entry>`;
 
