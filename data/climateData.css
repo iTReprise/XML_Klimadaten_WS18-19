@@ -6,6 +6,14 @@ html * {
   display: none;
 }
 
+#yearCol {
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .card:hover {
   border-image: none;
   border-color: #fff;
@@ -69,13 +77,13 @@ html * {
 
 #btnReset:hover {
   border-color: transparent;
-  background: linear-gradient(to right, #8D3B72 0%, #8A7090 51%, #89A7A7 100%);
+  background: linear-gradient(to right, rgba(141,59,114,0.6) 0%, rgba(138,112,144,0.7) 50%, rgba(137,167,167,0.7) 100%);
   background-size: 105% auto;
 }
 
 #btnApply:hover {
   border-color: transparent;
-  background: linear-gradient(to right, #89A7A7 0%, #72E1D1 51%, #B5D8CC 100%);
+  background: linear-gradient(to right, rgba(137,167,167,0.7) 0%, rgba(114,225,209,0.7) 50%, rgba(181,216,204,0.7) 100%);
   background-size: 105% auto;
 }
 
@@ -117,6 +125,19 @@ html * {
 
 .ct-series-e .ct-area {
   fill: #B5D8CC;
+}
+
+#yearChart .ct-series-a .ct-area {
+  fill: url(#fiveColorGradientTakeTwo) !important;
+}
+
+#yearChart .ct-series-a .ct-line {
+  stroke: url(#fiveColorGradientTakeTwo) !important;
+}
+
+.ct-zoom-rect {
+  fill: rgba(174, 172, 182, 0.349);
+  stroke: url(#fiveColorGradientTakeTwo)
 }
 
 .linkColor {

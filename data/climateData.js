@@ -166,6 +166,7 @@ async function startXPathFuncs(xpathExp, xmlText) {
  * Main
  * Fetch a xml file and start evaluation of it
  */
+// fetch('http://www.imn.htwk-leipzig.de/~futku/climateData.xml')
 fetch('http://localhost:1543/climateData.xml')
   .then(response => response.text()
     .then(xmlText => startXPathFuncs('temperature/curTemp', xmlText)));
@@ -173,6 +174,17 @@ fetch('http://localhost:1543/climateData.xml')
 
 /* eslint no-underscore-dangle: 0 */
 $(() => {
+  $('#returnToMain, #baseView').click(() => {
+    $('.allMainCards').show();
+    $('#yearCol').show();
+    $('.subCards').hide();
+    $('.monthsBase').hide();
+    times = ['01:00', null, null, null, null];
+    $('.btn').each((index, element) => {
+      if ($(element).attr('id') !== 'btnA') $(element).removeClass('active');
+    });
+  });
+
   $('#tempMain').click(() => {
     $('.allMainCards').toggle();
     $('.temperatureCards').toggle();

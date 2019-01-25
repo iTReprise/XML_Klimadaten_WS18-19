@@ -9,19 +9,29 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
-      <link rel="stylesheet" href="/chartist/chartist.min.css"/>
+      <link rel="stylesheet" href="http://www.imn.htwk-leipzig.de/~futku/chartist/chartist.min.css"/>
       <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"/>
-      <link rel="stylesheet" href="/climateData.css"/>
+      <link rel="stylesheet" href="http://www.imn.htwk-leipzig.de/~futku/climateData.css"/>
       <title>Klimadaten von Dinosaur, CO</title>
     </head>
     <body>
-      <br/><h1 class="text-center">Klimadaten für Dinosaur, Colorado, USA</h1>
 
-      <xsl:call-template name="createMainCards"/>
-      <xsl:call-template name="createSubCards"/>
-      <xsl:call-template name="createMonthsBase"/>
-
-      <a href="https://github.com/iTReprise/XML_Klimadaten_WS18-19" class="github-corner" aria-label="View source on GitHub">
+      <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <a class="navbar-brand" href="#" id="returnToMain">Hauptmenü</a>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" id="baseView" href="#">Monate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="dayView" href="#">Tage</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="yearView" href="#">Jahr</a>
+            </li>
+          </ul>
+        </div>
+        <a href="https://github.com/iTReprise/XML_Klimadaten_WS18-19" class="github-corner" aria-label="View source on GitHub">
         <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
           <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
           <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/>
@@ -38,16 +48,38 @@
           </linearGradient>
         </svg>
       </a>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <h1 class="text-center">Klimadaten für Dinosaur, Colorado, USA</h1>
+            <xsl:call-template name="createMainCards"/>
+            <xsl:call-template name="createSubCards"/>
+            <xsl:call-template name="createMonthsBase"/>
+          </div>
+        </div>
+        
+        <div class="col" id="yearCol">
+          <xsl:call-template name="createYearView"/>
+        </div>
+      </div>
+
+ 
 
       <footer class="page-footer font-small fixed-bottom" id="fixedFooter">
-        <div class="footer-copyright text-center py-3">© 2019 Copyright:
-          <a class="linkColor" href="https://github.com/iTReprise"> Florian Utku</a>
+        <div class="container-fluid">
+          <div class="footer-copyright text-right">© 2019 Copyright:
+            <a class="linkColor" href="https://github.com/iTReprise"> Florian Utku</a>
+          </div>
         </div>
       </footer>
 
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      <script src="chartist/chartist.min.js"></script>
-      <script src="climateData.js"></script>  
+      <script src="http://www.imn.htwk-leipzig.de/~futku/chartist/chartist.min.js"></script>
+      <script src="http://www.imn.htwk-leipzig.de/~futku/chartist/chartist-plugin-zoom.min.js"></script>
+      <script src="http://www.imn.htwk-leipzig.de/~futku/climateData.js"></script>
+      <script src="http://www.imn.htwk-leipzig.de/~futku/yearView.js"></script>  
     </body>
   </html>
 </xsl:template>
@@ -503,11 +535,34 @@
   <xsl:param name="monthAbr"/>
   <xsl:param name="value"/>
 
-  <h3 class="text-center"><xsl:value-of select="$monthFull"/></h3>
+  <h3 class="text-center"><xsl:value-of select="$monthFull"/>, 2017</h3>
   <div class="row md-center">
     <div id="{$monthAbr}{$value}" class="ct-chart ct-major-seventh {$value}Chart col-md-12 mb-2"/>
   </div>
   <br/>
+</xsl:template>
+
+<xsl:template name="createYearView">
+  <h2 class="text-center">
+    <span id="yearViewVale">Aktuelle Temperatur</span>
+    im Jahr 2017,
+    <span id="yearViewTime">abends</span>
+  </h2>
+
+  <div class="row md-center">
+    <div id="yearChart" class="ct-chart ct-octave col-md-12 mb-2" oncontextmenu="return false;"/>
+  </div>
+  <br/>
+
+  <svg style="width:0;height:0;poisiton:absolute;" aria-hidden="true" focusable="false">
+  <linearGradient id="fiveColorGradientTakeTwo" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#8D3B72"/>
+    <stop offset="25%" stop-color="#8A7090"/>
+    <stop offset="50%" stop-color="#89A7A7"/>
+    <stop offset="75%" stop-color="#72E1D1"/>
+    <stop offset="100%" stop-color="#B5D8CC"/>
+  </linearGradient>
+</svg>
 </xsl:template>
 
 </xsl:stylesheet>
