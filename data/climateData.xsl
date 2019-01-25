@@ -9,15 +9,21 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
-      <link rel="stylesheet" href="http://www.imn.htwk-leipzig.de/~futku/chartist/chartist.min.css"/>
+      <link rel="stylesheet" href="/chartist/chartist.min.css"/>
       <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"/>
-      <link rel="stylesheet" href="http://www.imn.htwk-leipzig.de/~futku/climateData.css"/>
+      <link rel="stylesheet" href="/climateData.css"/>
       <title>Klimadaten von Dinosaur, CO</title>
     </head>
     <body>
 
-      <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <a class="navbar-brand" href="#" id="returnToMain">Hauptmenü</a>
+      <nav class="navbar navbar-expand-sm navbar-light sticky-top">
+        <a class="navbar-brand" href="#" id="returnToMain">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarText">
+            <span class="navbar-toggler-icon"/>
+          </button>
+          Hauptmenü
+        </a>
+
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -76,10 +82,10 @@
       </footer>
 
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      <script src="http://www.imn.htwk-leipzig.de/~futku/chartist/chartist.min.js"></script>
-      <script src="http://www.imn.htwk-leipzig.de/~futku/chartist/chartist-plugin-zoom.min.js"></script>
-      <script src="http://www.imn.htwk-leipzig.de/~futku/climateData.js"></script>
-      <script src="http://www.imn.htwk-leipzig.de/~futku/yearView.js"></script>  
+      <script src="/chartist/chartist.min.js"></script>
+      <script src="/chartist/chartist-plugin-zoom.min.js"></script>
+      <script src="/climateData.js"></script>
+      <script src="/yearView.js"></script>  
     </body>
   </html>
 </xsl:template>
@@ -89,7 +95,7 @@
   <div class="container allMainCards">
   <h2 class="text-center">Hauptmenü</h2><br/>
     <br/>
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card1" id="tempMain" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Temperatur</h5>
@@ -101,7 +107,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card2" id="surfaceMain" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Oberfläche</h5>
@@ -113,7 +119,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card3" id="solarMain" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Sonneneinstrahlung</h5>
@@ -125,7 +131,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card4" id="humidMain" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Feuchtigkeit</h5>
@@ -153,7 +159,7 @@
   <h2 class="text-center">Temperatur</h2><br/>
   <br/>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 backToMain" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Hauptmenü</h5>
@@ -162,7 +168,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card2" id="showCurTemp" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Aktuelle Temperatur</h5>
@@ -171,7 +177,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card3" id="showAvgTemp" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Durchschnittliche Temperatur</h5>
@@ -180,7 +186,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card4" id="showMaxTemp" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Maximale Temperatur</h5>
@@ -189,7 +195,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card5" id="showMinTemp" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Minimale Temperatur</h5>
@@ -207,7 +213,7 @@
   <h2 class="text-center">Oberflächentemperatur</h2><br/>
   <br/>
   
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 backToMain" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Hauptmenü</h5>
@@ -216,7 +222,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card2" id="showAvgSurTemp" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Durchschnittliche Oberflächentemperatur</h5>
@@ -225,7 +231,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card3" id="showMaxSurTemp" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Maximale Oberflächentemperatur</h5>
@@ -234,7 +240,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card4" id="showMinSurTemp" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Minimale Oberflächentemperatur</h5>
@@ -252,7 +258,7 @@
   <h2 class="text-center">Sonneneinstrahlung</h2><br/>
   <br/>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 backToMain" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Hauptmenü</h5>
@@ -261,7 +267,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card2" id="showAvgSolRad" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Durchschnittliche Sonneneinstrahlung</h5>
@@ -270,7 +276,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card3" id="showMaxSolRad" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Maximale Sonneneinstrahlung</h5>
@@ -279,7 +285,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card4" id="showMinSolRad" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Minimale Sonneneinstrahlung</h5>
@@ -296,7 +302,7 @@
   <h2 class="text-center">Feuchtigkeit</h2><br/>
   <br/>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 backToMain" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Hauptmenü</h5>
@@ -305,7 +311,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card2" id="showAvgRelHum" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Durchschnittliche Feuchtigkeit</h5>
@@ -319,29 +325,29 @@
 
 <xsl:template name="createTimes">
   <div class="container">
-    <div class="row justify-content-md-center showAllTimes">
-      <div class="col-md text-center">
+    <div class="row justify-content-sm-center showAllTimes">
+      <div class="col-sm text-center">
         <button type="button" class="btn btn-outline active" id="btnA">01:00 Uhr</button>
       </div>
-      <div class="col-md text-center">
+      <div class="col-sm text-center">
         <button type="button" class="btn btn-outline" id="btnB">06:00 Uhr</button>
       </div>
-      <div class="col-md text-center">
+      <div class="col-sm text-center">
         <button type="button" class="btn btn-outline" id="btnC">11:00 Uhr</button>
       </div>
-      <div class="col-md text-center">
+      <div class="col-sm text-center">
         <button type="button" class="btn btn-outline" id="btnD">16:00 Uhr</button>
       </div>
-      <div class="col-md text-center">
+      <div class="col-sm text-center">
         <button type="button" class="btn btn-outline" id="btnE">21:00 Uhr</button>
       </div>
     </div>
     <br/>
-    <div class="row justify-content-md-center showResets">
-      <div class="col-lg text-center">
+    <div class="row justify-content-sm-center showResets">
+      <div class="col-sm text-center">
         <button type="button" class="btn btn-outline" id="btnReset">Zurücksetzen</button>
       </div>
-      <div class="col-lg text-center">
+      <div class="col-sm text-center">
         <button type="button" class="btn btn-outline" id="btnApply">Anwenden</button>
       </div>
 
@@ -451,7 +457,7 @@
   <br/>
 
   <div class="container returnCard">
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-sm-center">
       <div class="card col-md-12 mb-2 card1 backTo{$valueFull}" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title"><xsl:value-of select="$valueFull"/></h5>
