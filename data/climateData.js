@@ -176,7 +176,7 @@ fetch('http://localhost:1543/climateData.xml')
 $(() => {
   $('#returnToMain, #baseView').click(() => {
     $('.allMainCards').show();
-    $('#yearCol').show();
+    $('#yearCol').hide();
     $('.subCards').hide();
     $('.monthsBase').hide();
     times = ['01:00', null, null, null, null];
