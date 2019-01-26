@@ -7,16 +7,20 @@ let initYear = true;
 
 async function createChart(data, unit) {
   const fixedUnit = unit === 'C' || unit === 'F' ? `°${unit}` : `${unit}`;
-  const dataPoints = [[]];
-
-  let i = 1;
-  await data.forEach(value => dataPoints[0].push({ x: i++, y: value })); /* eslint no-plusplus: 0 */
-
+  
   /* empty value to missing value */
   /* eslint no-confusing-arrow: 0 */
-  dataPoints[0].map(value => value === '' ? null : value);
+  let dataPoints = await data;
+  dataPoints = dataPoints.map(value => value === '' ? null : value);
 
-  const chartData = { series: dataPoints };
+  /* needs to be a certain format to zoom */ 
+  let specialArray = [[]];
+  for (let i = 0; i < dataPoints.length; i += 1) {
+    const element = dataPoints[i];
+    specialArray[0].push({ x: i, y: element });
+  }
+
+  const chartData = { series: specialArray };
   const chartOptions = {
     showArea: true,
     showLine: true,

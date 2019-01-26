@@ -3,7 +3,7 @@
 /* global XPathResult */
 /* global xmlDocument */
 
-let activeDate = '2017.01.01';
+let activeDate = '2017.07.04';
 let init = true;
 
 async function createChartDay(data, unit) {
@@ -11,14 +11,21 @@ async function createChartDay(data, unit) {
 
   /* empty value to missing value */
   /* eslint no-confusing-arrow: 0 */
-  const fixedArray = await data;
-  fixedArray.map(value => value === '' ? null : value);
+  let fixedArray = await data;
+  fixedArray = fixedArray.map(value => value === '' ? null : value);
+  if (fixedArray.length != 24) fixedArray.unshift(null);
 
-  const chartData = { series: fixedArray };
+  let labels = [];
+  for (let i = 0; i < 24; i++) {
+    const hour = i < 10 ? `0${i}` : i;
+    labels.push(`${hour}:00`);
+  }
+
+  const chartData = { series: [fixedArray], labels };
   const chartOptions = {
     showArea: true,
     showPoint: false,
-    fullWidth: true,
+    fullWidth: false,
     axisY: {
       labelInterpolationFnc: value => value + fixedUnit,
       offset: 60,
@@ -100,7 +107,7 @@ $(() => {
     format: 'dd.mm.yyyy',
     startDate: '01.01.2017',
     endDate: '31.12.2017',
-    defaultViewDate: '01.01.2017',
+    defaultViewDate: '04.07.2017',
     autoclose: true,
   });
 

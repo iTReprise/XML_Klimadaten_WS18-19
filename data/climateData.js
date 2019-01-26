@@ -47,8 +47,8 @@ let xmlDocument;
  *        array[0] = 'jan' || 'feb' || etc.,
  *        array[1] = 'curTemp' || 'avgtemp' || etc.
  */
-function doStuff(dataPoints) {
-  const xpathExp = dataPoints.shift();
+async function doStuff(dataPoints) {
+  const xpathExp = await dataPoints.shift();
   const currMonthString = dateToStringMap[dataPoints.shift()];
   let currInf = dataPoints.shift();
   currInf = currInf.charAt(0).toUpperCase() + currInf.slice(1);
@@ -62,7 +62,7 @@ function doStuff(dataPoints) {
 
   /* empty value to missing value */
   /* eslint no-confusing-arrow: 0 */
-  const fixedArray = dataPoints;
+  let fixedArray = dataPoints;
   fixedArray.forEach((e, i) => { if (e !== null) fixedArray[i] = e.map(value => value === '' ? null : value); });
 
   /* show a different style of chart for relHum or solRad */

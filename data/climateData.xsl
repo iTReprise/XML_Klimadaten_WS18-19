@@ -641,7 +641,7 @@
         </div>
 
         <div class="col-sm-auto">
-          <a class="btn btn-outline btn-lg" id="datePicker">am 01.01.2017</a>
+          <a class="btn btn-outline btn-lg" id="datePicker">am 04.07.2017</a>
         </div>
 
         <div class="col-sm-auto">
