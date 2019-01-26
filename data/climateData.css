@@ -14,6 +14,12 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.collapse.in{
+  display:block !important;
+  float: left;
+  width: 100%;
+}
+
 .card:hover {
   border-image: none;
   border-color: #fff;

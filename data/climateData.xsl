@@ -18,15 +18,17 @@
     <body>
 
       <nav class="navbar navbar-expand-sm navbar-light sticky-top">
-        <a class="navbar-brand" href="#" id="returnToMain">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarText">
-            <span class="navbar-toggler-icon"/>
+        <div>
+          <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbarText">
+            <span class="navbar-toggler-icon" id="hamburgerIcon"/>
           </button>
-          Hauptmenü
-        </a>
+          <a class="navbar-brand" href="#" id="returnToMain">
+            Hauptmenü
+          </a>
+        </div>
 
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav mr-auto">
+        <div class="navbar-collapse collapse" id="navbarText">
+          <ul class="nav navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" id="baseView" href="#">Monate</a>
             </li>
@@ -38,6 +40,7 @@
             </li>
           </ul>
         </div>
+
         <a href="https://github.com/iTReprise/XML_Klimadaten_WS18-19" class="github-corner" aria-label="View source on GitHub">
         <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
           <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>

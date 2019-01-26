@@ -185,6 +185,11 @@ $(() => {
     });
   });
 
+  $('#hamburgerIcon').click(() => {
+    console.log(1);
+    
+  });
+
   $('#tempMain').click(() => {
     $('.allMainCards').toggle();
     $('.temperatureCards').toggle();
