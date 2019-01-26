@@ -166,8 +166,7 @@ async function startXPathFuncs(xpathExp, xmlText) {
  * Main
  * Fetch a xml file and start evaluation of it
  */
-// fetch('http://www.imn.htwk-leipzig.de/~futku/climateData.xml')
-fetch('http://localhost:1543/climateData.xml')
+fetch('http://www.imn.htwk-leipzig.de/~futku//climateData.xml')
   .then(response => response.text()
     .then(xmlText => startXPathFuncs('temperature/curTemp', xmlText)));
 
@@ -177,6 +176,7 @@ $(() => {
   $('#returnToMain, #baseView').click(() => {
     $('.allMainCards').show();
     $('#yearCol').hide();
+    $('#dayCol').hide();
     $('.subCards').hide();
     $('.monthsBase').hide();
     times = ['01:00', null, null, null, null];
@@ -352,7 +352,7 @@ $(() => {
     }
   });
 
-  $('.btn').click(function btnClicked() {
+  $('.timesBtn').click(function btnClicked() {
     const btn = $(this);
     const btnString = btn.text().substring(0, 5);
     const xPath = btn.parent().parent().parent().parent()

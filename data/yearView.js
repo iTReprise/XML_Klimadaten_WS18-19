@@ -3,7 +3,9 @@
 /* global XPathResult */
 /* global xmlDocument */
 
-async function createChart(data, unit, xpathExp) {
+let initYear = true;
+
+async function createChart(data, unit) {
   const fixedUnit = unit === 'C' || unit === 'F' ? `°${unit}` : `${unit}`;
   const dataPoints = [[]];
 
@@ -12,9 +14,6 @@ async function createChart(data, unit, xpathExp) {
 
   const chartData = { series: dataPoints };
   const chartOptions = {
-    high: 40,
-    low: -25,
-    base: 0,
     showArea: true,
     showLine: true,
     showPoint: false,
@@ -39,9 +38,9 @@ async function createChart(data, unit, xpathExp) {
   Chartist.Line('#yearChart', chartData, chartOptions);
 }
 
-async function parseXML(xpathExp) {
+async function parseXML(xpathExp, stringTime) {
   const data = [];
-  const stringTime = $('#yearViewTime').text();
+  // const stringTime = $('#yearViewTime').text();
 
   /* eslint no-nested-ternary: 0 */
   const time = stringTime === 'nachts' ? '09:00' : stringTime === 'mittags' ? '18:00' : '01:00';
@@ -58,21 +57,78 @@ async function parseXML(xpathExp) {
   createChart(data, unit, xpathExp);
 }
 
-$(() => {
-  $('#yearView').click(() => {
-    $('.allMainCards').hide();
-    $('.subCards').hide();
-    $('.monthsBase').hide();
+function changeChart() {
+  let name;
+  let time;
+  let xpathExp;
 
-    $('#yearCol').show();
-
-    parseXML('temperature/curTemp');
+  $('.timeSelect').each((index, element) => {
+    if ($(element).hasClass('active')) {
+      time = $(element).get(0).text;
+    }
   });
-});
 
+  $('.valueSelect').each((index, element) => {
+    if ($(element).hasClass('active')) {
+      xpathExp = element.getAttribute('id').substring(7);
+      name = $(element).get(0).text;
+    }
+  });
+
+  switch (xpathExp.substring(3, 6)) {
+    case 'Tem':
+      xpathExp = `temperature/${xpathExp}`;
+      break;
+    case 'Sur':
+      xpathExp = `surface/${xpathExp}`;
+      break;
+    case 'Sol':
+      xpathExp = `solar/${xpathExp}`;
+      break;
+    case 'Rel':
+      xpathExp = `humidity/${xpathExp}`;
+      break;
+    default:
+      break;
+  }
+
+  $('#dropdownTimeBtn').text(time);
+  $('#dropdownValueBtn').text(name);
+
+  parseXML(xpathExp, time);
+}
 
 /**
  * nachts = 09:00
  * mittag = 18:00
  * abend = 00:01
  */
+$(() => {
+  $('#yearView').click(() => {
+    $('.allMainCards').hide();
+    $('.subCards').hide();
+    $('.monthsBase').hide();
+    $('#dayCol').hide();
+
+    $('#yearCol').show();
+
+    if (initYear) {
+      parseXML('temperature/curTemp', 'abends');
+      initYear = false;
+    }
+  });
+
+  $('.timeSelect').click(function setNewTime() {
+    $('.timeSelect').each((index, element) => $(element).removeClass('active'));
+    $($(this).get(0)).addClass('active');
+
+    changeChart();
+  });
+
+  $('.valueSelect').click(function setNewTime() {
+    $('.valueSelect').each((index, element) => $(element).removeClass('active'));
+    $($(this).get(0)).addClass('active');
+
+    changeChart();
+  });
+});

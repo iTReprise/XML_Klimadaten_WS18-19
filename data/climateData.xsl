@@ -8,10 +8,11 @@
   <html>
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
-      <link rel="stylesheet" href="/chartist/chartist.min.css"/>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+      <link rel="stylesheet" href="http://www.imn.htwk-leipzig.de/~futku/chartist/chartist.min.css"/>
       <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"/>
-      <link rel="stylesheet" href="/climateData.css"/>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet"/>
+      <link rel="stylesheet" href="http://www.imn.htwk-leipzig.de/~futku/climateData.css"/>
       <title>Klimadaten von Dinosaur, CO</title>
     </head>
     <body>
@@ -69,23 +70,31 @@
         <div class="col" id="yearCol">
           <xsl:call-template name="createYearView"/>
         </div>
+
+        <div class="col" id="dayCol">
+          <xsl:call-template name="createDayView"/>
+        </div>
       </div>
 
  
 
       <footer class="page-footer font-small fixed-bottom" id="fixedFooter">
         <div class="container-fluid">
-          <div class="footer-copyright text-right">© 2019 Copyright:
+          <div class="footer-copyright text-center">© 2019 Copyright:
             <a class="linkColor" href="https://github.com/iTReprise"> Florian Utku</a>
           </div>
         </div>
       </footer>
 
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      <script src="/chartist/chartist.min.js"></script>
-      <script src="/chartist/chartist-plugin-zoom.min.js"></script>
-      <script src="/climateData.js"></script>
-      <script src="/yearView.js"></script>  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+      <script src="http://www.imn.htwk-leipzig.de/~futku/chartist/chartist.min.js"></script>
+      <script src="http://www.imn.htwk-leipzig.de/~futku/chartist/chartist-plugin-zoom.min.js"></script>
+      <script src="http://www.imn.htwk-leipzig.de/~futku/climateData.js"></script>
+      <script src="http://www.imn.htwk-leipzig.de/~futku/yearView.js"></script>  
+      <script src="http://www.imn.htwk-leipzig.de/~futku/dayView.js"></script>  
     </body>
   </html>
 </xsl:template>
@@ -327,28 +336,28 @@
   <div class="container">
     <div class="row justify-content-sm-center showAllTimes">
       <div class="col-sm text-center">
-        <button type="button" class="btn btn-outline active" id="btnA">01:00 Uhr</button>
+        <button type="button" class="btn timesBtn btn-outline active" id="btnA">01:00 Uhr</button>
       </div>
       <div class="col-sm text-center">
-        <button type="button" class="btn btn-outline" id="btnB">06:00 Uhr</button>
+        <button type="button" class="btn timesBtn btn-outline" id="btnB">06:00 Uhr</button>
       </div>
       <div class="col-sm text-center">
-        <button type="button" class="btn btn-outline" id="btnC">11:00 Uhr</button>
+        <button type="button" class="btn timesBtn btn-outline" id="btnC">11:00 Uhr</button>
       </div>
       <div class="col-sm text-center">
-        <button type="button" class="btn btn-outline" id="btnD">16:00 Uhr</button>
+        <button type="button" class="btn timesBtn btn-outline" id="btnD">16:00 Uhr</button>
       </div>
       <div class="col-sm text-center">
-        <button type="button" class="btn btn-outline" id="btnE">21:00 Uhr</button>
+        <button type="button" class="btn timesBtn btn-outline" id="btnE">21:00 Uhr</button>
       </div>
     </div>
     <br/>
     <div class="row justify-content-sm-center showResets">
       <div class="col-sm text-center">
-        <button type="button" class="btn btn-outline" id="btnReset">Zurücksetzen</button>
+        <button type="button" class="btn timesBtn btn-outline" id="btnReset">Zurücksetzen</button>
       </div>
       <div class="col-sm text-center">
-        <button type="button" class="btn btn-outline" id="btnApply">Anwenden</button>
+        <button type="button" class="btn timesBtn btn-outline" id="btnApply">Anwenden</button>
       </div>
 
     </div>
@@ -550,25 +559,99 @@
 
 <xsl:template name="createYearView">
   <h2 class="text-center">
-    <span id="yearViewVale">Aktuelle Temperatur</span>
-    im Jahr 2017,
-    <span id="yearViewTime">abends</span>
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="dropdown dropdownValue col-sm-auto">
+          <button class="btn btn-outline btn-lg dropdown-toggle" type="button" id="dropdownValueBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aktuelle Temperatur</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownValueBtn">
+            <a class="dropdown-item valueSelect active" id="toggle_curTemp">Aktuelle Temperatur</a>
+            <a class="dropdown-item valueSelect" id="toggle_avgTemp">Durchschnittliche Temperatur</a>
+            <a class="dropdown-item valueSelect" id="toggle_maxTemp">Maximale Temperatur</a>
+            <a class="dropdown-item valueSelect" id="toggle_minTemp">Minimale Temperatur</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item valueSelect" id="toggle_avgSurTemp">Durchschnittliche Oberflächentemperatur</a>
+            <a class="dropdown-item valueSelect" id="toggle_maxSurTemp">Maximale Oberflächentemperatur</a>
+            <a class="dropdown-item valueSelect" id="toggle_minSurTemp">Minimale Oberflächentemperatur</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item valueSelect" id="toggle_avgSolRad">Durchschnittliche Sonneneinstrahlung</a>
+            <a class="dropdown-item valueSelect" id="toggle_maxSolRad">Maximale Sonneneinstrahlung</a>
+            <a class="dropdown-item valueSelect" id="toggle_minSolRad">Minimale Sonneneinstrahlung</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item valueSelect" id="toggle_avgRelHum">Durchschnittliche Feuchtigkeit</a>
+          </div>
+        </div>
+
+        <div class="col-sm-auto">
+          <a class="btn btn-outline btn-lg">im Jahr 2017,</a>
+        </div>
+
+        <div class="dropdown dropdownTime col-sm-auto">
+          <button class="btn btn-outline dropdown-toggle btn-lg" type="button" id="dropdownTimeBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">abends</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownTimeBtn">
+            <a class="dropdown-item timeSelect" id="toggleNightView">nachts</a>
+            <a class="dropdown-item timeSelect" id="toggleNoonView">mittags</a>
+            <a class="dropdown-item timeSelect active" id="toggleEveView">abends</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </h2>
 
   <div class="row md-center">
-    <div id="yearChart" class="ct-chart ct-octave col-md-12 mb-2" oncontextmenu="return false;"/>
+    <div id="yearChart" class="ct-chart ct-major-tenth col-md-12 mb-2" oncontextmenu="return false;"/>
   </div>
-  <br/>
 
   <svg style="width:0;height:0;poisiton:absolute;" aria-hidden="true" focusable="false">
-  <linearGradient id="fiveColorGradientTakeTwo" x1="0%" y1="0%" x2="100%" y2="0%">
-    <stop offset="0%" stop-color="#8D3B72"/>
-    <stop offset="25%" stop-color="#8A7090"/>
-    <stop offset="50%" stop-color="#89A7A7"/>
-    <stop offset="75%" stop-color="#72E1D1"/>
-    <stop offset="100%" stop-color="#B5D8CC"/>
-  </linearGradient>
-</svg>
+    <linearGradient id="fiveColorGradientTakeTwo" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8D3B72"/>
+      <stop offset="25%" stop-color="#8A7090"/>
+      <stop offset="50%" stop-color="#89A7A7"/>
+      <stop offset="75%" stop-color="#72E1D1"/>
+      <stop offset="100%" stop-color="#B5D8CC"/>
+    </linearGradient>
+  </svg>
+
+</xsl:template>
+
+<xsl:template name="createDayView">
+  <h2 class="text-center">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="dropdown dropdownValue col-sm-auto">
+          <button class="btn btn-outline btn-lg dropdown-toggle" type="button" id="dropdownValueBtnDay" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aktuelle Temperatur</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownValueBtnDay">
+            <a class="dropdown-item valueSelectDay active" id="toggle_curTemp">Aktuelle Temperatur</a>
+            <a class="dropdown-item valueSelectDay" id="toggle_avgTemp">Durchschnittliche Temperatur</a>
+            <a class="dropdown-item valueSelectDay" id="toggle_maxTemp">Maximale Temperatur</a>
+            <a class="dropdown-item valueSelectDay" id="toggle_minTemp">Minimale Temperatur</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item valueSelectDay" id="toggle_avgSurTemp">Durchschnittliche Oberflächentemperatur</a>
+            <a class="dropdown-item valueSelectDay" id="toggle_maxSurTemp">Maximale Oberflächentemperatur</a>
+            <a class="dropdown-item valueSelectDay" id="toggle_minSurTemp">Minimale Oberflächentemperatur</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item valueSelectDay" id="toggle_avgSolRad">Durchschnittliche Sonneneinstrahlung</a>
+            <a class="dropdown-item valueSelectDay" id="toggle_maxSolRad">Maximale Sonneneinstrahlung</a>
+            <a class="dropdown-item valueSelectDay" id="toggle_minSolRad">Minimale Sonneneinstrahlung</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item valueSelectDay" id="toggle_avgRelHum">Durchschnittliche Feuchtigkeit</a>
+          </div>
+        </div>
+
+        <div class="col-sm-auto">
+          <a class="btn btn-outline btn-lg" id="datePicker">am 01.01.2017</a>
+        </div>
+
+        <div class="col-sm-auto">
+          <a class="btn btn-outline btn-lg">von 00:00 bis 24:00 Uhr (UTC)</a>
+        </div>
+      </div>
+    </div>
+  </h2>
+  
+  <div class="row justify-content-md-center">
+    <div id="dayChart" class="ct-chart ct-major-tenth col-md-12 mb-2"/>
+  </div>
+
 </xsl:template>
 
 </xsl:stylesheet>

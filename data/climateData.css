@@ -6,7 +6,7 @@ html * {
   display: none;
 }
 
-#yearCol {
+#yearCol, #dayCol {
   display: none;
 }
 
@@ -18,6 +18,10 @@ body::-webkit-scrollbar {
   border-image: none;
   border-color: #fff;
   background-image: linear-gradient(to right, rgba(141,59,114,0.3) 0%, rgba(138,112,144,0.3) 25%, rgba(137,167,167,0.3) 50%, rgba(114,225,209,0.3) 75%, rgba(181,216,204,0.3) 100%);
+}
+
+.btn-outline {
+  background-color: #fff;
 }
 
 #btnA {
@@ -135,6 +139,14 @@ body::-webkit-scrollbar {
   stroke: url(#fiveColorGradientTakeTwo) !important;
 }
 
+#dayChart .ct-series-a .ct-area {
+  fill: url(#fiveColorGradient) !important;
+}
+
+#dayChart .ct-series-a .ct-line {
+  stroke: url(#fiveColorGradient) !important;
+}
+
 .ct-zoom-rect {
   fill: rgba(174, 172, 182, 0.349);
   stroke: url(#fiveColorGradientTakeTwo)
@@ -152,6 +164,14 @@ body::-webkit-scrollbar {
   border-image: linear-gradient(to right, rgba(141,59,114,0.3) 0%, rgba(138,112,144,0.3) 25%, rgba(137,167,167,0.3) 50%, rgba(114,225,209,0.3) 75%, rgba(181,216,204,0.3) 100%);
   border-image-slice: 1;
   border-width: 0.1sem;
+}
+
+.valueSelect.active, .timeSelect.active, .timeSelect:active, .valueSelect:active {
+  background-color: rgba(141,59,114,0.3);
+}
+
+.valueSelectDay.active, .valueSelectDay:active {
+  background-color: rgba(137,167,167,0.3);
 }
 
 /*
