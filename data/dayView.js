@@ -9,7 +9,12 @@ let init = true;
 async function createChartDay(data, unit) {
   const fixedUnit = unit === 'C' || unit === 'F' ? `°${unit}` : `${unit}`;
 
-  const chartData = { series: [data] };
+  /* empty value to missing value */
+  /* eslint no-confusing-arrow: 0 */
+  const fixedArray = await data;
+  fixedArray.map(value => value === '' ? null : value);
+
+  const chartData = { series: fixedArray };
   const chartOptions = {
     showArea: true,
     showPoint: false,

@@ -12,6 +12,10 @@ async function createChart(data, unit) {
   let i = 1;
   await data.forEach(value => dataPoints[0].push({ x: i++, y: value })); /* eslint no-plusplus: 0 */
 
+  /* empty value to missing value */
+  /* eslint no-confusing-arrow: 0 */
+  dataPoints[0].map(value => value === '' ? null : value);
+
   const chartData = { series: dataPoints };
   const chartOptions = {
     showArea: true,

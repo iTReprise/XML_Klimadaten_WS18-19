@@ -60,12 +60,17 @@ function doStuff(dataPoints) {
     labelValues.push(i + 1);
   }
 
+  /* empty value to missing value */
+  /* eslint no-confusing-arrow: 0 */
+  const fixedArray = dataPoints;
+  fixedArray.forEach((e, i) => { if (e !== null) fixedArray[i] = e.map(value => value === '' ? null : value); });
+
   /* show a different style of chart for relHum or solRad */
   const fancyMode = xpathExp.split('/')[0] === 'humidity' || xpathExp.split('/')[0] === 'solar';
   const currChart = Chartist.Line(`#${currMonthString + currInf}`,
     {
       labels: labelValues,
-      series: dataPoints,
+      series: fixedArray,
     },
     {
       showPoint: false,
@@ -186,8 +191,7 @@ $(() => {
   });
 
   $('#hamburgerIcon').click(() => {
-    console.log(1);
-    
+    //
   });
 
   $('#tempMain').click(() => {
