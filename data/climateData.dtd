@@ -3,33 +3,40 @@
   latitude,
   entry+
 )>
+
 <!ELEMENT longitude (#PCDATA)>
 <!ELEMENT latitude (#PCDATA)>
+
 <!ELEMENT entry (
   temperature,
   surface,
   solar,
   humidity
 )>
+
 <!ELEMENT temperature (
   curTemp,
   avgTemp,
   maxTemp,
   minTemp
 )>
+
 <!ELEMENT surface (
   avgSurTemp,
   maxSurTemp,
   minSurTemp
 )>
+
 <!ELEMENT solar (
   avgSolRad,
   maxSolRad,
   minSolRad
 )>
+
 <!ELEMENT humidity (
   avgRelHum
 )>
+
 <!ELEMENT curTemp (#PCDATA)>
 <!ELEMENT avgTemp (#PCDATA)>
 <!ELEMENT maxTemp (#PCDATA)>
@@ -42,44 +49,62 @@
 <!ELEMENT minSolRad (#PCDATA)>
 <!ELEMENT avgRelHum (#PCDATA)>
 
-<!ATTLIST climateData locationID CDATA #REQUIRED>
-<!ATTLIST climateData xmlns:xsi CDATA #REQUIRED>
-<!ATTLIST climateData xsi:noNamespaceSchemaLocation CDATA #REQUIRED>
+<!ATTLIST climateData
+  locationID CDATA #REQUIRED
+  xmlns:xsi CDATA #REQUIRED
+  xsi:noNamespaceSchemaLocation CDATA #REQUIRED>
+
 <!ATTLIST longitude unit CDATA #FIXED "decimal_degrees">
 <!ATTLIST latitude unit CDATA #FIXED "decimal_degrees">
-<!ATTLIST entry date CDATA #REQUIRED>
-<!ATTLIST entry time CDATA #REQUIRED>
-<!ATTLIST entry standard CDATA #FIXED "UTC">
+
+<!ATTLIST entry
+  date CDATA #REQUIRED
+  time CDATA #REQUIRED
+  standard CDATA #FIXED "UTC">
+
 <!ATTLIST curTemp
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST avgTemp
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST maxTemp
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST minTemp
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST avgSurTemp
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST maxSurTemp
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST minSurTemp
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST avgSolRad
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST maxSolRad
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST minSolRad
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
 <!ATTLIST avgRelHum
   unit CDATA #REQUIRED
   xsi:nil (true|false) #REQUIRED>
+
+<!-- validated with the following cli command on Kali Linux: !-->
+<!-- 'xmllint -noout -dtdvalid climateData.dtd climateData.xml' !-->
