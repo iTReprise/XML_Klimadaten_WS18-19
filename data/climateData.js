@@ -50,8 +50,10 @@ let xmlDocument;
 async function doStuff(dataPoints) {
   const xpathExp = await dataPoints.shift();
   const currMonthString = dateToStringMap[dataPoints.shift()];
+
   let currInf = dataPoints.shift();
   currInf = currInf.charAt(0).toUpperCase() + currInf.slice(1);
+
   let unit = dataPoints.shift();
   unit = unit === 'C' || unit === 'F' ? `°${unit}` : `${unit}`;
 
